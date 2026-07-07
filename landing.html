@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmaMente - Sua Ferramenta de Autocuidado Diário</title>
+  <meta name="description" content="O app que ajuda você a controlar ansiedade e depressão com ferramentas baseadas em TCC, meditação e autocuidado.">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box }
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      background: #eef5f9;
+      color: #1a2a3a;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1100px; margin:0 auto; padding:0 20px }
+
+    /* NAV */
+    .nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 24px; max-width:1100px; margin:0 auto;
+    }
+    .nav-logo { font-size:1.4rem; font-weight:700; color:#2d6a8a }
+    .nav-badge {
+      background:#2d6a8a; color:#fff; padding:6px 16px; border-radius:20px;
+      font-size:0.8rem; font-weight:600;
+    }
+    .nav a {
+      text-decoration:none; color:#2d6a8a; font-weight:600;
+      padding:8px 20px; border-radius:8px; transition:all .2s;
+    }
+    .nav a:hover { background:rgba(45,106,138,0.1) }
+    .nav .btn-primary {
+      background:#2d6a8a; color:#fff !important; padding:10px 28px;
+    }
+    .nav .btn-primary:hover { background:#1a4a6a }
+
+    /* HERO */
+    .hero {
+      text-align:center; padding:80px 20px 60px;
+      background:linear-gradient(135deg, #eef5f9 0%, #d8e8f0 100%);
+    }
+    .hero h1 {
+      font-size:2.8rem; line-height:1.2; margin-bottom:16px;
+      background:linear-gradient(135deg,#2d6a8a,#4a9aba);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .hero p {
+      font-size:1.15rem; color:#5a7a8a; max-width:600px; margin:0 auto 32px;
+    }
+    .hero-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap }
+    .btn {
+      display:inline-block; padding:14px 36px; border-radius:12px;
+      font-size:1rem; font-weight:700; text-decoration:none;
+      transition:all .2s; cursor:pointer; border:none;
+    }
+    .btn-primary { background:#2d6a8a; color:#fff }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(45,106,138,0.3) }
+    .btn-secondary { background:#fff; color:#2d6a8a; border:2px solid #2d6a8a }
+    .btn-secondary:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.1) }
+    .btn-premium { background:linear-gradient(135deg,#2d6a8a,#d4764a); color:#fff }
+    .btn-premium:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,118,74,0.3) }
+
+    .hero-badge {
+      display:inline-block; background:rgba(45,106,138,0.1); color:#2d6a8a;
+      padding:6px 20px; border-radius:20px; font-size:0.85rem; font-weight:600;
+      margin-bottom:20px;
+    }
+
+    /* FEATURES */
+    .features { padding:80px 0; background:#fff }
+    .features h2 { text-align:center; font-size:2rem; margin-bottom:48px; color:#1a2a3a }
+    .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px }
+    .feature-card {
+      background:#f8fafc; padding:28px; border-radius:16px;
+      border:1px solid #e8edf0; transition:all .3s;
+    }
+    .feature-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(45,106,138,0.1) }
+    .feature-icon { font-size:2rem; margin-bottom:12px }
+    .feature-card h3 { font-size:1.05rem; margin-bottom:8px }
+    .feature-card p { font-size:0.9rem; color:#5a7a8a }
+
+    /* APP PREVIEW */
+    .app-showcase { padding:80px 0; background:#eef5f9; text-align:center }
+    .app-showcase h2 { font-size:2rem; margin-bottom:16px }
+    .app-showcase p { color:#5a7a8a; max-width:600px; margin:0 auto 40px }
+    .device-mockup {
+      max-width:320px; margin:0 auto; background:#2d6a8a;
+      border-radius:40px; padding:16px; box-shadow:0 20px 60px rgba(45,106,138,0.2);
+    }
+    .device-screen {
+      background:#fff; border-radius:28px; padding:16px; min-height:500px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-size:0.9rem; color:#5a7a8a;
+    }
+    .device-screen .features-mini { text-align:left; width:100% }
+    .device-screen .features-mini li { padding:8px 0; border-bottom:1px solid #eee; list-style:none }
+    .device-screen .features-mini li::before { content:'✓ '; color:#2d6a8a; font-weight:700 }
+
+    /* TESTIMONIALS */
+    .testimonials { padding:80px 0; background:#fff }
+    .testimonials h2 { text-align:center; font-size:2rem; margin-bottom:48px }
+    .testimonial-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px }
+    .testimonial-card {
+      background:#f8fafc; padding:24px; border-radius:16px; border:1px solid #e8edf0;
+    }
+    .testimonial-card .stars { color:#f0a030; font-size:1.1rem; margin-bottom:8px }
+    .testimonial-card p { font-size:0.9rem; color:#3a4a5a; font-style:italic; margin-bottom:12px }
+    .testimonial-card .author { font-weight:600; font-size:0.85rem; color:#2d6a8a }
+
+    /* PRICING */
+    .pricing { padding:80px 0; background:#eef5f9 }
+    .pricing h2 { text-align:center; font-size:2rem; margin-bottom:8px }
+    .pricing > .container > p { text-align:center; color:#5a7a8a; margin-bottom:40px }
+    .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; align-items:start }
+
+    .plan-card {
+      background:#fff; padding:32px 24px; border-radius:16px;
+      text-align:center; border:1px solid #e0e8ec; position:relative;
+    }
+    .plan-card.featured {
+      border:2px solid #2d6a8a; transform:scale(1.03);
+      box-shadow:0 12px 40px rgba(45,106,138,0.15);
+    }
+    .plan-card .badge {
+      position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+      background:#2d6a8a; color:#fff; padding:4px 20px; border-radius:20px;
+      font-size:0.78rem; font-weight:600;
+    }
+    .plan-card h3 { font-size:1.2rem; margin-bottom:8px }
+    .plan-price { font-size:2.2rem; font-weight:700; color:#2d6a8a; margin-bottom:4px }
+    .plan-price span { font-size:0.9rem; color:#8aaaba; font-weight:400 }
+    .plan-period { font-size:0.82rem; color:#8aaaba; margin-bottom:20px }
+    .plan-features { list-style:none; text-align:left; margin-bottom:24px; padding:0 }
+    .plan-features li { padding:8px 0; font-size:0.9rem; border-bottom:1px solid #f0f4f8; display:flex; align-items:center; gap:8px }
+    .plan-features .check { color:#4caf50 }
+    .plan-features .cross { color:#ccc }
+
+    .price-note { text-align:center; margin-top:32px; font-size:0.85rem; color:#8aaaba }
+    .price-note a { color:#2d6a8a; font-weight:600 }
+
+    /* FAQ */
+    .faq { padding:80px 0; background:#fff }
+    .faq h2 { text-align:center; font-size:2rem; margin-bottom:48px }
+    .faq-grid { max-width:700px; margin:0 auto }
+    .faq-item {
+      border-bottom:1px solid #e0e8ec; padding:20px 0;
+    }
+    .faq-question {
+      font-weight:600; font-size:1rem; cursor:pointer;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .faq-question::after { content:'+'; font-size:1.3rem; color:#2d6a8a }
+    .faq-answer { font-size:0.9rem; color:#5a7a8a; margin-top:12px; display:none }
+    .faq-item.open .faq-question::after { content:'-' }
+    .faq-item.open .faq-answer { display:block }
+
+    /* CTA FINAL */
+    .cta-final {
+      text-align:center; padding:80px 20px;
+      background:linear-gradient(135deg,#2d6a8a,#1a4a6a); color:#fff;
+    }
+    .cta-final h2 { font-size:2.2rem; margin-bottom:12px }
+    .cta-final p { font-size:1.1rem; opacity:0.9; margin-bottom:32px }
+    .cta-final .btn { background:#fff; color:#2d6a8a; font-size:1.1rem; padding:16px 48px }
+    .cta-final .btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.2) }
+
+    /* FOOTER */
+    footer {
+      text-align:center; padding:32px 20px; background:#1a2a3a; color:#8aaaba; font-size:0.85rem;
+    }
+    footer a { color:#7ab8d4 }
+    footer .social { margin:16px 0; display:flex; gap:16px; justify-content:center }
+    footer .social a { color:#fff; text-decoration:none; font-size:1.5rem }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      .hero h1 { font-size:2rem }
+      .hero p { font-size:1rem }
+      .plan-card.featured { transform:none }
+      .pricing-grid { grid-template-columns:1fr }
+      .nav a.btn-primary { padding:8px 16px; font-size:0.85rem }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <span class="nav-logo">&#9752; CalmaMente</span>
+    <div>
+      <a href="#features">Recursos</a>
+      <a href="#pricing">Preços</a>
+      <a href="#faq">FAQ</a>
+      <a href="index.html" class="btn-primary">Acessar App</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">&#127775; Mais de 5.000 usuários</div>
+      <h1>O app que cuida de você<br>todos os dias</h1>
+      <p>Ferramentas baseadas em TCC, meditação guiada, diário de humor e muito mais para ajudar você a controlar a ansiedade e viver com mais leveza.</p>
+      <div class="hero-buttons">
+        <a href="index.html" class="btn btn-primary">&#9752; Começar Grátis</a>
+        <a href="#pricing" class="btn btn-secondary">Ver Planos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Tudo que você precisa em um só lugar</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#9752;</div>
+          <h3>Respiração Guiada</h3>
+          <p>Técnicas 4-7-8, quadrada e caixa para acalmar a mente em minutos.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9782;</div>
+          <h3>Diário de Humor</h3>
+          <p>Registre emoções, acompanhe padrões e veja gráficos da sua evolução.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#129504;</div>
+          <h3>Reestruturação Cognitiva</h3>
+          <p>Desafie pensamentos negativos com técnicas profissionais de TCC.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#9888;</div>
+          <h3>SOS Anti-Crise</h3>
+          <p>Exercício de ancoragem 5-4-3-2-1 para momentos de crise com um clique.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#127916;</div>
+          <h3>Vídeos Relaxantes</h3>
+          <p>Conteúdo exclusivo para meditar, relaxar e se motivar.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#10024;</div>
+          <h3>Diário de Gratidão</h3>
+          <p>Registre 3 coisas boas do dia e cultive uma mente mais positiva.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#127770;</div>
+          <h3>Rotina do Sono</h3>
+          <p>Checklist noturno e registro de qualidade do sono.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128200;</div>
+          <h3>Dashboard de Progresso</h3>
+          <p>Veja sua evolução com gráficos, streaks e insights personalizados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP SHOWCASE -->
+  <section class="app-showcase">
+    <div class="container">
+      <h2>Simples, bonito e eficaz</h2>
+      <p>Interface limpa e intuitiva. Seu terapeuta de bolso, disponível 24 horas por dia.</p>
+      <div class="device-mockup">
+        <div class="device-screen">
+          <div style="margin-bottom:20px">
+            <span style="display:inline-block;background:#2d6a8a;color:#fff;padding:4px 12px;border-radius:6px;font-size:0.8rem">&#9752; CalmaMente</span>
+          </div>
+          <div class="features-mini">
+            <ul>
+              <li>Respiração Guiada</li>
+              <li>Diário de Humor com Gráficos</li>
+              <li>SOS Anti-Crise</li>
+              <li>TCC - Reestruturação Cognitiva</li>
+              <li>Diário de Gratidão</li>
+              <li>Pomodoro Foco</li>
+              <li>Hábitos Diários</li>
+              <li>Rotina do Sono</li>
+              <li>Vídeos Relaxantes</li>
+              <li>Dashboard de Progresso</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;font-size:0.78rem;color:#8aaaba">+10 ferramentas em um app</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>O que nossos usuários dizem</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"O CalmaMente mudou minha rotina. O exercício de respiração me ajuda todos os dias com a ansiedade."</p>
+          <div class="author">— Ana Beatriz, 28 anos</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"A parte de TCC é fantástica. Conseguir desafiar meus pensamentos negativos com o guia fez toda diferença."</p>
+          <div class="author">— Carlos Eduardo, 35 anos</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Simples, bonito e realmente útil. Uso o diário de humor todo dia e já vi padrões que nunca tinha percebido."</p>
+          <div class="author">— Juliana M., 24 anos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2>Invista em você</h2>
+      <p>Escolha o plano ideal para sua jornada de autocuidado</p>
+      <div class="pricing-grid">
+        <div class="plan-card">
+          <h3>Grátis</h3>
+          <div class="plan-price">R$ 0 <span></span></div>
+          <div class="plan-period">sempre grátis</div>
+          <ul class="plan-features">
+            <li><span class="check">&#9989;</span> Respiração Guiada</li>
+            <li><span class="check">&#9989;</span> Diário de Humor</li>
+            <li><span class="check">&#9989;</span> SOS Crise</li>
+            <li><span class="check">&#9989;</span> Pomodoro Foco</li>
+            <li><span class="cross">&#10060;</span> Reestruturação Cognitiva</li>
+            <li><span class="cross">&#10060;</span> Diário de Gratidão</li>
+            <li><span class="cross">&#10060;</span> Sono Avançado</li>
+            <li><span class="cross">&#10060;</span> Insights Semanais</li>
+          </ul>
+          <a href="index.html" class="btn btn-secondary" style="width:100%">Começar Grátis</a>
+        </div>
+
+        <div class="plan-card featured">
+          <div class="badge">Popular</div>
+          <h3>Plus</h3>
+          <div class="plan-price">R$ 9,90 <span>/mês</span></div>
+          <div class="plan-period">faturamento mensal, cancele quando quiser</div>
+          <ul class="plan-features">
+            <li><span class="check">&#9989;</span> Tudo do Grátis</li>
+            <li><span class="check">&#9989;</span> Reestruturação Cognitiva</li>
+            <li><span class="check">&#9989;</span> Diário de Gratidão</li>
+            <li><span class="check">&#9989;</span> Sono Avançado</li>
+            <li><span class="check">&#9989;</span> Vídeos Plus</li>
+            <li><span class="check">&#9989;</span> Hábitos Plus</li>
+            <li><span class="check">&#9989;</span> Dados Ilimitados</li>
+            <li><span class="cross">&#10060;</span> Conteúdo Premium</li>
+          </ul>
+          <a href="index.html" class="btn btn-primary" style="width:100%">Assinar Plus</a>
+        </div>
+
+        <div class="plan-card">
+          <h3>Premium</h3>
+          <div class="plan-price">R$ 19,90 <span>/mês</span></div>
+          <div class="plan-period">faturamento mensal, cancele quando quiser</div>
+          <ul class="plan-features">
+            <li><span class="check">&#9989;</span> Tudo do Plus</li>
+            <li><span class="check">&#9989;</span> Vídeos Premium Exclusivos</li>
+            <li><span class="check">&#9989;</span> Insights Semanais</li>
+            <li><span class="check">&#9989;</span> Temas Exclusivos</li>
+            <li><span class="check">&#9989;</span> Suporte Prioritário</li>
+            <li><span class="check">&#9989;</span> Sem Anúncios</li>
+            <li><span class="check">&#9989;</span> Conteúdo Exclusivo</li>
+            <li><span class="check">&#9989;</span> Programa de Afiliados</li>
+          </ul>
+          <a href="index.html" class="btn btn-premium" style="width:100%">Assinar Premium</a>
+        </div>
+      </div>
+      <p class="price-note">&#128274; Pagamento seguro via Pix, cartão ou boleto. <a href="index.html">7 dias grátis no Premium</a></p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2>Perguntas Frequentes</h2>
+      <div class="faq-grid">
+        <div class="faq-item open">
+          <div class="faq-question">O CalmaMente substitui terapia?</div>
+          <div class="faq-answer">Não. O CalmaMente é uma ferramenta de autocuidado complementar, baseada em técnicas de TCC e mindfulness. Ele não substitui acompanhamento profissional. Em caso de crise, ligue 188 (CVV).</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Posso cancelar quando quiser?</div>
+          <div class="faq-answer">Sim! Todos os planos podem ser cancelados a qualquer momento, sem multa. Seu acesso continua até o fim do período já pago.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Como funciona o período grátis do Premium?</div>
+          <div class="faq-answer">Você assina e tem 7 dias para testar todos os recursos. Se não gostar, cancele nos primeiros 7 dias e não paga nada.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Meus dados são seguros?</div>
+          <div class="faq-answer">Sim. Todos os seus dados de humor e diário ficam salvos apenas no seu navegador (localStorage). Não armazenamos nada em servidores.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Quais formas de pagamento são aceitas?</div>
+          <div class="faq-answer">Aceitamos Pix (aprovação instantânea), cartão de crédito (via Mercado Pago) e boleto bancário.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="container">
+      <h2>Sua jornada de autocuidado começa agora</h2>
+      <p>Mais de 5.000 pessoas já estão cuidando da mente todos os dias. Junte-se a elas.</p>
+      <a href="index.html" class="btn">&#9752; Começar Grátis Agora</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="social">
+      <a href="https://instagram.com/calmamente" target="_blank">&#128247;</a>
+      <a href="https://wa.me/5511999999999" target="_blank">&#128242;</a>
+      <a href="mailto:contato@calmamente.app">&#9993;</a>
+    </div>
+    <p>&#9752; CalmaMente &mdash; Feito com caro para sua saúde mental</p>
+    <p style="margin-top:8px">Este app não substitui acompanhamento profissional. Crise? Ligue <a href="tel:188">188</a> (CVV)</p>
+    <p style="margin-top:16px;opacity:0.6;font-size:0.78rem"><a href="index.html">Acessar o App</a></p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+    });
+  </script>
+</body>
+</html>

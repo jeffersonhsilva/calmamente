@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmaMente - App de Saúde Mental</title>
+  <link rel="stylesheet" href="style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6569755209339807" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">&#9752; CalmaMente</span>
+        <span class="sidebar-plan" id="planBadge">Grátis</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="dashboard"><span class="nav-icon">&#9679;</span> Dashboard</a>
+        <a href="#" class="nav-item" data-page="sos"><span class="nav-icon sos-icon">&#9888;</span> SOS</a>
+        <a href="#" class="nav-item" data-page="breathing"><span class="nav-icon">&#9752;</span> Respiração</a>
+        <a href="#" class="nav-item" data-page="mood"><span class="nav-icon">&#9782;</span> Humor</a>
+        <a href="#" class="nav-item" data-page="cbt"><span class="nav-icon">&#129504;</span> Pensamentos</a>
+        <a href="#" class="nav-item" data-page="gratitude"><span class="nav-icon">&#10024;</span> Gratidão</a>
+        <a href="#" class="nav-item" data-page="habits"><span class="nav-icon">&#9989;</span> Hábitos</a>
+        <a href="#" class="nav-item" data-page="sleep"><span class="nav-icon">&#127770;</span> Sono</a>
+        <a href="#" class="nav-item" data-page="pomodoro"><span class="nav-icon">&#9202;</span> Foco</a>
+        <a href="#" class="nav-item" data-page="programas"><span class="nav-icon">&#127919;</span> Programas</a>
+        <a href="#" class="nav-item" data-page="testes"><span class="nav-icon">&#128203;</span> Testes</a>
+        <a href="#" class="nav-item" data-page="videos"><span class="nav-icon">&#127916;</span> Vídeos</a>
+        <a href="#" class="nav-item" data-page="store"><span class="nav-icon">&#128722;</span> Recomendações</a>
+        <a href="#" class="nav-item" data-page="progress"><span class="nav-icon">&#128200;</span> Progresso</a>
+        <a href="#" class="nav-item" data-page="plans"><span class="nav-icon">&#127891;</span> Planos</a>
+        <a href="#" class="nav-item" data-page="settings"><span class="nav-icon">&#9881;</span> Ajustes</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="sidebarToggle" class="sidebar-collapse">&larr; Recolher</button>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <button id="menuToggle" class="menu-toggle">&#9776;</button>
+        <h2 id="pageTitle">Dashboard</h2>
+        <div class="topbar-right">
+          <button id="themeToggle" class="icon-btn" aria-label="Alternar tema">&#9789;</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- ADSENSE TOP -->
+    <div class="ad-banner" id="adTop">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6569755209339807" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+        <!-- DASHBOARD -->
+        <section id="page-dashboard" class="page active">
+          <div class="greeting">
+            <h1 id="greetingText">Bom dia</h1>
+            <p id="dailyAffirmation" class="affirmation"></p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-card"><span class="stat-num" id="statStreak">0</span><span class="stat-label">dias seguidos</span></div>
+            <div class="stat-card"><span class="stat-num" id="statMoods">0</span><span class="stat-label">registros</span></div>
+            <div class="stat-card"><span class="stat-num" id="statVideos">0</span><span class="stat-label">vídeos vistos</span></div>
+            <div class="stat-card" id="statInsights"><span class="stat-num">&#128274;</span><span class="stat-label">Score</span></div>
+          </div>
+          <div class="quick-actions">
+            <h3>Ações Rápidas</h3>
+            <div class="action-grid">
+              <button class="action-btn sos-action" data-page="sos">&#9888; Estou em Crise</button>
+              <button class="action-btn" data-page="breathing">&#9752; Respirar</button>
+              <button class="action-btn" data-page="mood">&#9782; Registrar Humor</button>
+              <button class="action-btn" data-page="videos">&#127916; Ver Vídeos</button>
+            </div>
+          </div>
+          <div class="daily-tip-card">
+            <h3>&#128161; Dica do Dia</h3>
+            <p id="dailyTipContent" style="font-size:0.9rem;color:var(--text-light)"></p>
+          </div>
+          <div class="mood-mini-chart">
+            <h3>Seus Últimos Humores</h3>
+            <canvas id="miniChart" height="120"></canvas>
+          </div>
+          <!-- AdSense mid content -->
+          <div class="ad-banner ad-inline">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6569755209339807" data-ad-slot="1234567891" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+        </section>
+
+        <!-- SOS -->
+        <section id="page-sos" class="page">
+          <div class="sos-container">
+            <button id="sosButton" class="sos-button"><span class="sos-big">&#9888;</span><span class="sos-text">Preciso de Ajuda AGORA</span></button>
+            <div id="sosExercise" class="sos-exercise" style="display:none">
+              <h3>Exercício de Ancoragem 5-4-3-2-1</h3>
+              <div id="sosStep" class="sos-step"></div>
+              <div class="sos-progress-bar"><div id="sosProgress" class="sos-progress-fill"></div></div>
+              <button id="sosNext" class="btn btn-primary">Próximo</button>
+              <button id="sosStop" class="btn btn-secondary">Parar</button>
+            </div>
+            <div class="crisis-contacts">
+              <h3>Contatos de Emergência</h3>
+              <a href="tel:188" class="crisis-link">&#128222; CVV - 188</a>
+              <a href="https://cvv.org.br" target="_blank" class="crisis-link">&#127760; cvv.org.br</a>
+              <button id="setEmergencyContact" class="btn btn-secondary">&#9998; Meu Contato de Confiança</button>
+              <p id="emergencyContactDisplay" class="emergency-contact-display"></p>
+            </div>
+
+          <div class="crisis-plan premium-feature" style="margin-top:24px;background:var(--card-bg);padding:20px;border-radius:var(--radius);border:1px solid var(--border)">
+            <h3>&#128221; Meu Plano de Crise</h3>
+            <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:12px">Monte seu plano personalizado para momentos difíceis</p>
+            <div class="crisis-plan-form">
+              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:4px">O que me ajuda a me acalmar?</label>
+              <textarea id="crisisCalm" placeholder="Ex: Respirar fundo, tomar água, ouvir música..." rows="2" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);margin-bottom:12px"></textarea>
+              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:4px">Quem posso ligar?</label>
+              <input type="text" id="crisisCall" placeholder="Ex: Mãe - (11) 99999-0000" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);margin-bottom:12px">
+              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:4px">O que me lembrar?</label>
+              <textarea id="crisisRemind" placeholder="Ex: Isso vai passar. Eu já superei outras crises." rows="2" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);margin-bottom:12px"></textarea>
+              <button id="saveCrisisPlan" class="btn btn-primary">Salvar Plano</button>
+            </div>
+            <div id="crisisPlanDisplay" style="display:none;margin-top:16px;padding:16px;background:var(--border);border-radius:8px"></div>
+          </div>
+          </div>
+        </section>
+
+        <!-- BREATHING -->
+        <section id="page-breathing" class="page">
+          <h2>Respiração Guiada</h2>
+          <div class="breath-selector">
+            <button class="breath-type active" data-type="square">Quadrado</button>
+            <button class="breath-type" data-type="478">4-7-8</button>
+            <button class="breath-type" data-type="box">Caixa</button>
+            <button class="breath-type tier-plus" data-type="relaxamento">Relaxamento</button>
+          </div>
+          <div class="breathing-container">
+            <div class="breathing-circle" id="breathCircle"><span class="breath-text" id="breathText">Inspire</span></div>
+            <div class="breath-controls">
+              <button id="startBreath" class="btn btn-primary">Iniciar</button>
+              <label class="breath-label">Ciclos: <select id="breathCycles"><option>3</option><option selected>5</option><option>10</option></select></label>
+            </div>
+            <div class="breath-progress"><span id="cycleCount">0</span>/<span id="totalCycles">5</span></div>
+          </div>
+        </section>
+
+        <!-- MOOD -->
+        <section id="page-mood" class="page">
+          <h2>Diário de Humor</h2>
+          <div class="mood-form">
+            <p>Como você está?</p>
+            <div class="mood-selector">
+              <button class="mood-btn" data-mood="otimo">&#128513;</button>
+              <button class="mood-btn" data-mood="bem">&#128522;</button>
+              <button class="mood-btn" data-mood="neutro">&#128528;</button>
+              <button class="mood-btn" data-mood="triste">&#128542;</button>
+              <button class="mood-btn" data-mood="ansioso">&#128560;</button>
+            </div>
+            <textarea id="moodNote" placeholder="O que está acontecendo?" rows="2"></textarea>
+            <button id="saveMood" class="btn btn-primary">Salvar</button>
+          </div>
+          <div class="mood-chart-container"><h3>Evolução Semanal</h3><canvas id="moodChart" height="200"></canvas></div>
+          <div class="mood-history"><h3>Histórico</h3><div id="moodList"></div></div>
+        </section>
+
+        <!-- CBT -->
+        <section id="page-cbt" class="page">
+          <h2>Reestruturação Cognitiva</h2>
+          <p class="page-desc">Desafie pensamentos negativos com TCC</p>
+          <div class="cbt-form">
+            <label>1. Pensamento Automático</label><textarea id="cbtAuto" placeholder="O que passou pela sua cabeça?" rows="2"></textarea>
+            <label>2. Distorção</label><select id="cbtDistortion"><option>Catastrofização</option><option>Tudo-ou-nada</option><option>Personalização</option><option>Leitura mental</option><option>Generalização</option><option>Filtro mental</option><option>Desqualificar positivo</option><option>Deveria</option></select>
+            <label>3. Evidência a Favor</label><textarea id="cbtEvidence" placeholder="O que apoia?" rows="2"></textarea>
+            <label>4. Evidência Contra</label><textarea id="cbtCounter" placeholder="O que contradiz?" rows="2"></textarea>
+            <label>5. Pensamento Alternativo</label><textarea id="cbtAlternative" placeholder="Visão mais equilibrada?" rows="2"></textarea>
+            <button id="saveCbt" class="btn btn-primary tier-plus-btn">Salvar Registro</button>
+          </div>
+          <div class="cbt-history" id="cbtHistory"><h3>Seus Registros</h3><div id="cbtList"></div></div>
+        </section>
+
+        <!-- GRATITUDE -->
+        <section id="page-gratitude" class="page">
+          <h2>Diário de Gratidão</h2>
+          <p class="page-desc">3 coisas boas de hoje</p>
+          <div class="gratitude-form">
+            <input id="grat1" placeholder="O que foi bom hoje?" />
+            <input id="grat2" placeholder="Mais uma..." />
+            <input id="grat3" placeholder="E mais uma..." />
+            <button id="saveGratitude" class="btn btn-primary tier-plus-btn">Salvar</button>
+          </div>
+          <div class="gratitude-history" id="gratHistory"><h3>Registros Anteriores</h3><div id="gratList"></div></div>
+        </section>
+
+        <!-- HABITS -->
+        <section id="page-habits" class="page">
+          <h2>Hábitos Diários</h2>
+          <p class="page-desc">Marque seus autocuidados de hoje</p>
+          <div class="habit-list" id="habitList">
+            <label class="habit-item"><input type="checkbox" data-habit="agua"> Bebi água</label>
+            <label class="habit-item"><input type="checkbox" data-habit="alimentacao"> Comi bem</label>
+            <label class="habit-item"><input type="checkbox" data-habit="movimento"> Me movimentei</label>
+            <label class="habit-item"><input type="checkbox" data-habit="social"> Conversei com alguém</label>
+            <label class="habit-item tier-plus"><input type="checkbox" data-habit="meditacao"> Meditei</label>
+            <label class="habit-item tier-plus"><input type="checkbox" data-habit="leitura"> Li algo</label>
+            <label class="habit-item tier-premium"><input type="checkbox" data-habit="terapia"> Terapia/Hobby</label>
+            <label class="habit-item tier-premium"><input type="checkbox" data-habit="diario"> Escrevi no diário</label>
+          </div>
+          <div class="habit-streak">Streak: <strong id="habitStreak">0</strong> dias</div>
+        </section>
+
+        <!-- SLEEP -->
+        <section id="page-sleep" class="page">
+          <h2>Rotina do Sono</h2>
+          <p class="page-desc">Checklist para noite tranquila</p>
+          <div class="sleep-checklist" id="sleepChecklist">
+            <label class="sleep-item tier-premium"><input type="checkbox" data-sleep="telas"> Desliguei telas 1h antes</label>
+            <label class="sleep-item tier-premium"><input type="checkbox" data-sleep="luzes"> Luzes amenas</label>
+            <label class="sleep-item"><input type="checkbox" data-sleep="respirar"> Exercício de respiração</label>
+            <label class="sleep-item"><input type="checkbox" data-sleep="cafeina"> Sem cafeína após 18h</label>
+          </div>
+          <div class="sleep-log" id="sleepLogSection">
+            <h3>Registro de Sono</h3>
+            <div class="sleep-input-row">
+              <label>Dormi: <input type="time" id="sleepTime" class="sleep-input"></label>
+              <label>Acordei: <input type="time" id="wakeTime" class="sleep-input"></label>
+            </div>
+            <label>Qualidade: <select id="sleepQuality" class="sleep-input"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+            <button id="saveSleep" class="btn btn-primary tier-plus-btn">Salvar</button>
+          </div>
+        </section>
+
+        <!-- POMODORO -->
+        <section id="page-pomodoro" class="page">
+          <h2>Pomodoro Foco</h2>
+          <div class="pomodoro-container">
+            <div class="pomodoro-timer" id="pomodoroTimer">25:00</div>
+            <div class="pomodoro-phase" id="pomodoroPhase">Foco</div>
+            <div class="pomodoro-controls">
+              <button id="startPomodoro" class="btn btn-primary">Iniciar</button>
+              <button id="resetPomodoro" class="btn btn-secondary">Resetar</button>
+            </div>
+            <div class="pomodoro-settings">
+              <label>Foco: <input type="number" id="focusTime" value="25" min="1" max="120"> min</label>
+              <label>Pausa: <input type="number" id="breakTime" value="5" min="1" max="30"> min</label>
+            </div>
+            <div class="pomodoro-progress"><span id="pomodoroCycles">0</span> ciclos</div>
+            <!-- AdSense in pomodoro -->
+        <div class="ad-banner ad-inline" style="margin-top:20px">
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6569755209339807" data-ad-slot="1234567892" data-ad-format="auto" data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+          </div>
+        </section>
+
+        <!-- PROGRAMAS -->
+        <section id="page-programas" class="page">
+          <h2>Programas e Desafios</h2>
+          <p class="page-desc">Treinamentos guiados para transformar sua saúde mental</p>
+
+          <div class="program-tabs">
+            <button class="program-tab active" data-ptab="treinos">&#127919; Treinos</button>
+            <button class="program-tab" data-ptab="desafios">&#127942; Desafios</button>
+            <button class="program-tab" data-ptab="dicas">&#128161; Dicas</button>
+          </div>
+
+          <div id="programContent">
+            <!-- populated by JS -->
+          </div>
+        </section>
+
+        <!-- TESTES -->
+        <section id="page-testes" class="page">
+          <h2>Autoavaliação</h2>
+          <p class="page-desc">Questionários validados para entender sua saúde mental</p>
+          <div class="test-grid" id="testGrid">
+            <div class="test-card" data-test="gad7">
+              <div class="test-icon">&#128202;</div>
+              <h3>GAD-7</h3>
+              <p>Avaliação de ansiedade generalizada (7 perguntas)</p>
+              <span class="test-time">&#9200; 3 min</span>
+              <button class="btn btn-primary start-test-btn" onclick="startTest('gad7')">Iniciar</button>
+            </div>
+            <div class="test-card" data-test="phq9">
+              <div class="test-icon">&#128204;</div>
+              <h3>PHQ-9</h3>
+              <p>Avaliação de depressão (9 perguntas)</p>
+              <span class="test-time">&#9200; 4 min</span>
+              <button class="btn btn-primary start-test-btn premium-feature" onclick="startTest('phq9')">Iniciar</button>
+            </div>
+            <div class="test-card premium-feature" data-test="burnout">
+              <div class="test-icon">&#128170;</div>
+              <h3>Escala de Burnout</h3>
+              <p>Avaliação de esgotamento profissional</p>
+              <span class="test-time">&#9200; 5 min</span>
+              <button class="btn btn-primary start-test-btn" onclick="startTest('burnout')">Iniciar</button>
+            </div>
+          </div>
+          <div id="testRunning" style="display:none">
+            <div id="testQuiz"></div>
+          </div>
+          <div id="testResult" style="display:none">
+            <div id="testResultContent"></div>
+            <button class="btn btn-secondary" onclick="resetTests()" style="margin-top:12px">Voltar aos Testes</button>
+          </div>
+        </section>
+
+        <!-- VIDEOS -->
+        <section id="page-videos" class="page">
+          <h2>Vídeos & Sons Relaxantes</h2>
+          <p class="page-desc">Conteúdo para acalmar, inspirar e motivar</p>
+
+          <div class="video-sound-tabs">
+            <button class="vs-tab active" data-vstab="videos">&#127916; Vídeos</button>
+            <button class="vs-tab" data-vstab="sons">&#128266; Sons</button>
+          </div>
+
+          <div id="vsVideos">
+            <div class="video-categories">
+              <button class="video-cat active" data-cat="todos">Todos</button>
+              <button class="video-cat" data-cat="relaxar">Relaxar</button>
+              <button class="video-cat" data-cat="meditar">Meditar</button>
+              <button class="video-cat" data-cat="motivar">Motivar</button>
+              <button class="video-cat tier-premium" data-cat="exclusivo">Premium</button>
+            </div>
+            <div class="video-grid" id="videoGrid"></div>
+          </div>
+
+          <div id="vsSons" style="display:none">
+            <h3>Biblioteca de Sons Relaxantes</h3>
+            <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:16px">Sons gerados ao vivo para meditação, foco e sono</p>
+            <div class="sounds-grid" id="soundsGrid"></div>
+            <div id="soundPlayer" class="sound-player" style="display:none">
+              <div class="sound-player-info">
+                <span id="currentSoundName" style="font-weight:600"></span>
+                <input type="range" id="soundVolume" min="0" max="100" value="50" style="width:120px">
+              </div>
+              <button id="stopSoundBtn" class="btn btn-secondary">&#9632; Parar</button>
+            </div>
+          </div>
+
+      <div class="ad-banner ad-inline">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6569755209339807" data-ad-slot="1234567893" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    </section>
+
+    <!-- STORE / RECOMENDAÇÕES -->
+        <section id="page-store" class="page">
+          <h2>Recomendações</h2>
+          <p class="page-desc">Produtos e recursos que recomendamos para seu bem-estar</p>
+
+          <div class="store-section">
+            <h3>&#128218; Livros Recomendados</h3>
+            <div class="store-grid" id="bookGrid">
+              <div class="store-item">
+                <div class="store-img">&#128218;</div>
+                <h4>O Poder do Agora</h4>
+                <p>Eckhart Tolle</p>
+                <a href="https://amzn.to/4cHv8hD" target="_blank" class="store-link btn btn-primary">Ver na Amazon</a>
+              </div>
+              <div class="store-item">
+                <div class="store-img">&#128218;</div>
+                <h4>Ansiedade - Como Enfrentar o Mal do Século</h4>
+                <p>Augusto Cury</p>
+                <a href="https://amzn.to/3Yv9PCg" target="_blank" class="store-link btn btn-primary">Ver na Amazon</a>
+              </div>
+              <div class="store-item">
+                <div class="store-img">&#128218;</div>
+                <h4>Mindfulness</h4>
+                <p>Mark Williams</p>
+                <a href="https://amzn.to/3Yv9PCg" target="_blank" class="store-link btn btn-primary">Ver na Amazon</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-section">
+            <h3>&#127909; Apps e Cursos</h3>
+            <div class="store-grid">
+              <div class="store-item">
+                <div class="store-img">&#128241;</div>
+                <h4>Headspace</h4>
+                <p>Meditação guiada</p>
+                <a href="https://www.headspace.com/pt" target="_blank" class="store-link btn btn-primary">Acessar</a>
+              </div>
+              <div class="store-item">
+                <div class="store-img">&#128241;</div>
+                <h4>Calm</h4>
+                <p>Sono e relaxamento</p>
+                <a href="https://www.calm.com" target="_blank" class="store-link btn btn-primary">Acessar</a>
+              </div>
+              <div class="store-item tier-premium-store">
+                <div class="store-img">&#127891;</div>
+                <h4>Curso de TCC Online</h4>
+                <p>Autogerenciamento emocional</p>
+                <span class="premium-tag">Premium</span>
+                <button class="store-link btn btn-primary" onclick="showPage('plans')">Desbloquear</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-section">
+            <h3>&#128104;&#8205;&#127973; Profissionais Recomendados</h3>
+            <p class="page-desc" style="margin-bottom:12px">Terapeutas e psicólogos para acompanhamento</p>
+            <div class="store-grid">
+              <div class="store-item">
+                <div class="store-img">&#128104;&#8205;&#127973;</div>
+                <h4>Dra. Ana Silva</h4>
+                <p>Psicóloga Clínica - CRP 00/00000</p>
+                <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:8px">TCC e Mindfulness</p>
+                <a href="#" class="store-link btn btn-primary" onclick="alert('Agende sua consulta: (11) 99999-0000')">Agendar</a>
+              </div>
+              <div class="store-item">
+                <div class="store-img">&#128105;&#8205;&#127973;</div>
+                <h4>Dr. Carlos Oliveira</h4>
+                <p>Psicólogo - CRP 00/00001</p>
+                <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:8px">Terapia Online</p>
+                <a href="#" class="store-link btn btn-primary" onclick="alert('Agende sua consulta: (11) 99999-0001')">Agendar</a>
+              </div>
+              <div class="store-item tier-premium-store">
+                <div class="store-img">&#127891;</div>
+                <h4>Destaque-se Aqui</h4>
+                <p>Seja um profissional recomendado</p>
+                <span class="premium-tag">Anuncie</span>
+                <button class="store-link btn btn-primary" onclick="alert('Para anunciar: contato@calmamente.app')">Saiba Mais</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-section">
+            <h3>&#128230; Produtos Digitais</h3>
+            <p class="page-desc" style="margin-bottom:12px">Materiais de autocuidado para baixar</p>
+            <div class="store-grid" id="productGrid">
+              <div class="store-item" data-prod="diario-gratidao" data-price="9.90">
+                <div class="store-img">&#128221;</div>
+                <h4>Diário de Gratidão</h4>
+                <p>PDF 30 dias - imprima e use</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Diário de Gratidão', '9.90')">Comprar R$ 9,90</button>
+              </div>
+              <div class="store-item" data-prod="planner" data-price="14.90">
+                <div class="store-img">&#128203;</div>
+                <h4>Planner de Autocuidado</h4>
+                <p>PDF semanal + metas + humor</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Planner de Autocuidado', '14.90')">Comprar R$ 14,90</button>
+              </div>
+              <div class="store-item" data-prod="meditacao-mp3" data-price="4.90">
+                <div class="store-img">&#127911;</div>
+                <h4>Meditação Guiada MP3</h4>
+                <p>Áudio 20 min - relaxamento profundo</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Meditação Guiada MP3', '4.90')">Comprar R$ 4,90</button>
+              </div>
+              <div class="store-item" data-prod="ebook-ansiedade" data-price="19.90">
+                <div class="store-img">&#128216;</div>
+                <h4>E-book: Ansiedade</h4>
+                <p>Guia completo 120 páginas PDF</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('E-book: Ansiedade', '19.90')">Comprar R$ 19,90</button>
+              </div>
+              <div class="store-item" data-prod="ebook-depressao" data-price="17.90">
+                <div class="store-img">&#128216;</div>
+                <h4>E-book: Depressão</h4>
+                <p>Entender e superar - PDF 98 páginas</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('E-book: Depressão', '17.90')">Comprar R$ 17,90</button>
+              </div>
+              <div class="store-item" data-prod="sono-mp3" data-price="6.90">
+                <div class="store-img">&#127771;</div>
+                <h4>História para Dormir</h4>
+                <p>Áudio 30 min - relaxamento noturno</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('História para Dormir', '6.90')">Comprar R$ 6,90</button>
+              </div>
+              <div class="store-item" data-prod="cards" data-price="7.90">
+                <div class="store-img">&#127183;</div>
+                <h4>Cards de Afirmações</h4>
+                <p>30 cards PDF para imprimir e recortar</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Cards de Afirmações', '7.90')">Comprar R$ 7,90</button>
+              </div>
+              <div class="store-item" data-prod="respiracao" data-price="5.90">
+                <div class="store-img">&#9752;</div>
+                <h4>Guia de Respiração</h4>
+                <p>10 técnicas ilustradas - PDF</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Guia de Respiração', '5.90')">Comprar R$ 5,90</button>
+              </div>
+              <div class="store-item" data-prod="diario-humor" data-price="11.90">
+                <div class="store-img">&#128202;</div>
+                <h4>Diário de Humor</h4>
+                <p>PDF 60 dias + gráficos para preencher</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Diário de Humor PDF', '11.90')">Comprar R$ 11,90</button>
+              </div>
+              <div class="store-item" data-prod="cbt-guia" data-price="14.90">
+                <div class="store-img">&#129504;</div>
+                <h4>Guia Prático de TCC</h4>
+                <p>Planilhas de reestruturação cognitiva</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Guia Prático de TCC', '14.90')">Comprar R$ 14,90</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-section">
+            <h3>&#128230; Combos e Pacotes</h3>
+            <p class="page-desc" style="margin-bottom:12px">Kits completos com desconto especial</p>
+            <div class="store-grid">
+              <div class="store-item" style="border:2px solid var(--plus)">
+                <div class="store-img">&#127873;</div>
+                <h4>Kit Autocuidado Básico</h4>
+                <p>Diário Gratidão + Planner + Cards</p>
+                <p style="color:var(--plus);font-weight:700;font-size:1.1rem">R$ 24,90</p>
+                <p style="font-size:0.75rem;color:var(--text-light);text-decoration:line-through">R$ 32,70</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Kit Autocuidado Básico', '24.90')">Comprar Kit</button>
+              </div>
+              <div class="store-item" style="border:2px solid var(--plus)">
+                <div class="store-img">&#127873;</div>
+                <h4>Kit Mente Sã</h4>
+                <p>E-book Ansiedade + E-book Depressão + Guia TCC</p>
+                <p style="color:var(--plus);font-weight:700;font-size:1.1rem">R$ 39,90</p>
+                <p style="font-size:0.75rem;color:var(--text-light);text-decoration:line-through">R$ 52,70</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Kit Mente Sã', '39.90')">Comprar Kit</button>
+              </div>
+              <div class="store-item" style="border:2px solid var(--premium);position:relative">
+                <span style="position:absolute;top:-10px;right:-10px;background:var(--premium);color:#fff;padding:2px 12px;border-radius:8px;font-size:0.7rem;font-weight:600">Mais Vendido</span>
+                <div class="store-img">&#127873;</div>
+                <h4>Kit Completo Bem-Estar</h4>
+                <p>Todos os 10 produtos digitais</p>
+                <p style="color:var(--premium);font-weight:700;font-size:1.3rem">R$ 79,90</p>
+                <p style="font-size:0.75rem;color:var(--text-light);text-decoration:line-through">R$ 113,80</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Kit Completo Bem-Estar', '79.90')">Comprar Kit</button>
+              </div>
+              <div class="store-item" style="border:2px solid var(--premium)">
+                <div class="store-img">&#127873;</div>
+                <h4>Kit Meditação</h4>
+                <p>Meditação MP3 + História Dormir + Guia Respiração</p>
+                <p style="color:var(--premium);font-weight:700;font-size:1.1rem">R$ 14,90</p>
+                <p style="font-size:0.75rem;color:var(--text-light);text-decoration:line-through">R$ 17,70</p>
+                <button class="store-link btn btn-primary" onclick="openCheckout('Kit Meditação', '14.90')">Comprar Kit</button>
+              </div>
+            </div>
+          </div>
+
+      <div class="ad-banner ad-inline" style="margin-bottom:8px">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6569755209339807" data-ad-slot="1234567894" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+          <p style="text-align:center;font-size:0.7rem;color:var(--text-muted);margin-bottom:8px">Alguns links são de afiliados. Ao comprar por eles, você apoia o CalmaMente sem pagar nada a mais.</p>
+        </section>
+
+        <!-- PROGRESS -->
+        <section id="page-progress" class="page">
+          <h2>Dashboard de Progresso</h2>
+          <p class="page-desc">Sua jornada de autocuidado</p>
+          <div class="progress-grid">
+            <div class="progress-card"><h4>&#128200; Humor Médio</h4><span id="avgMood" class="progress-num">-</span></div>
+            <div class="progress-card"><h4>&#128204; Total Registros</h4><span id="totalMoods" class="progress-num">0</span></div>
+            <div class="progress-card" id="streakCard"><h4>&#128293; Sequência</h4><span id="longestStreak" class="progress-num">0</span></div>
+            <div class="progress-card" id="gratCard"><h4>&#127775; Gratidões</h4><span id="totalGratitudes" class="progress-num">0</span></div>
+          </div>
+          <div class="progress-chart-container" id="progressChartContainer"><h3>Evolução do Humor</h3><canvas id="progressChart" height="200"></canvas></div>
+          <div class="progress-card progress-tip" id="insightCard">
+            <h4>&#128161; Insight do Dia</h4>
+            <p id="dailyInsight">Registre mais humores para receber insights personalizados.</p>
+          </div>
+          <div class="achievements-section premium-feature">
+            <h3>&#127942; Conquistas</h3>
+            <div class="achievements-grid" id="achievementsGrid"></div>
+          </div>
+        </section>
+
+        <!-- PLANS -->
+        <section id="page-plans" class="page">
+          <h2>Planos</h2>
+          <p class="page-desc">Escolha o plano ideal para sua jornada</p>
+          <div class="plans-container" id="plansContainer">
+            <!-- populated by JS -->
+          </div>
+
+          <div class="corporate-section" style="margin-top:32px;background:var(--card-bg);backdrop-filter:blur(8px);padding:24px;border-radius:var(--radius);border:1px solid var(--border);text-align:center">
+            <h3>&#127970; Programa Corporativo</h3>
+            <p style="color:var(--text-light);margin-bottom:16px">Leve o CalmaMente para sua empresa e cuide da saúde mental da sua equipe</p>
+            <div class="corporate-benefits" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:16px">
+              <span style="background:var(--border);padding:6px 14px;border-radius:20px;font-size:0.85rem">&#9989; A partir de R$ 15/funcionário/mês</span>
+              <span style="background:var(--border);padding:6px 14px;border-radius:20px;font-size:0.85rem">&#9989; Dashboard para RH</span>
+              <span style="background:var(--border);padding:6px 14px;border-radius:20px;font-size:0.85rem">&#9989; Suporte prioritário</span>
+            </div>
+            <button class="btn btn-primary" onclick="alert('Fale conosco: comercial@calmamente.app')">&#128222; Solicitar Proposta</button>
+          </div>
+
+          <div style="margin-top:20px;text-align:center">
+            <button id="giftBtn" class="btn btn-secondary">&#127873; Presentear Alguém</button>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="page-settings" class="page">
+          <h2>Ajustes</h2>
+          <div class="settings-group">
+            <label class="setting-item"><span>&#9789; Modo Escuro</span><input type="checkbox" id="darkModeToggle"></label>
+            <label class="setting-item"><span>&#128276; Lembrete (notificação)</span><input type="checkbox" id="reminderToggle"></label>
+            <label class="setting-item tier-premium-item"><span>&#127912; Paleta de Cores</span><select id="themeSelect" class="sleep-input"><option value="default">Roxo (Padrão)</option><option value="sage">Verde Sálvia</option><option value="ocean" selected>Azul Oceano</option><option value="rose">Rosa Lavanda</option></select></label>
+          </div>
+          <div class="settings-group">
+            <h3>Seu Plano</h3>
+            <p style="margin-bottom:12px;font-size:0.9rem;color:var(--text-light)">Você está no plano <strong id="currentPlanText">Grátis</strong></p>
+            <button class="btn btn-primary" onclick="showPage('plans')">Gerenciar Plano</button>
+          </div>
+          <div class="settings-group">
+            <h3>Dados</h3>
+            <button id="exportData" class="btn btn-secondary">&#128230; Exportar Dados</button>
+            <button id="clearData" class="btn btn-secondary" style="color:#e74c3c">&#128465; Limpar Tudo</button>
+          </div>
+          <div class="settings-group">
+            <h3>&#10084;&#65039; Apoie o Projeto</h3>
+            <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:12px">Ajude o CalmaMente a crescer e ajudar mais pessoas</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button id="pixBtn" class="btn btn-secondary" onclick="alert('Chave Pix (cópia e cola): contato@calmamente.app\n\nOu leia o QR Code no nosso site.')">&#128179; Doar via Pix</button>
+              <button id="apoiaBtn" class="btn btn-secondary" onclick="window.open('https://apoia.se/calmamente','_blank')">&#127775; Apoia.se</button>
+              <button id="coffeeBtn" class="btn btn-secondary" onclick="window.open('https://buymeacoffee.com/calmamente','_blank')">&#9749; Buy Me a Coffee</button>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <h3>Ganhe Dinheiro Conosco</h3>
+            <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:8px">Indique o CalmaMente e ganhe comissão!</p>
+            <button id="affiliateBtn" class="btn btn-primary">&#127991; Programa de Afiliados</button>
+          </div>
+          <div class="settings-about">
+            <p>CalmaMente v3.0</p>
+            <p style="font-size:0.8rem;color:var(--text-light)">Este app não substitui acompanhamento profissional. Crise? Ligue 188.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- UPGRADE MODAL -->
+  <div id="upgradeModal" class="modal-overlay" style="display:none">
+    <div class="modal">
+      <h2 id="modalTitle">&#127891; Upgrade</h2>
+      <p id="modalDesc" style="margin-bottom:16px">Desbloqueie esta funcionalidade!</p>
+      <div id="modalPlanInfo" class="modal-plan-summary"></div>
+      <button id="confirmUpgrade" class="btn btn-primary" style="width:100%;margin-bottom:8px">&#10004; Assinar Agora</button>
+      <button id="closeModal" class="btn btn-secondary" style="width:100%">Agora não</button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutModal" class="modal-overlay" style="display:none">
+    <div class="modal" style="max-width:440px">
+      <h2>&#128722; Finalizar Compra</h2>
+      <div id="checkoutSummary" style="margin:16px 0;padding:16px;background:var(--card-bg);border-radius:var(--radius-sm);border:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span id="checkoutProduct" style="font-weight:600">Produto</span>
+          <span id="checkoutPrice" style="font-size:1.3rem;font-weight:700;color:var(--primary)">R$ 0</span>
+        </div>
+      </div>
+
+      <div class="payment-methods" style="margin-bottom:16px">
+        <h3 style="font-size:0.9rem;margin-bottom:12px">Forma de Pagamento</h3>
+
+        <div class="payment-option active" data-method="pix" style="padding:12px;border:2px solid var(--primary);border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer;background:var(--card-bg)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <input type="radio" name="payment" value="pix" checked style="accent-color:var(--primary)">
+            <span style="font-size:1.3rem">&#128179;</span>
+            <div><strong>Pix</strong><br><span style="font-size:0.78rem;color:var(--text-light)">Aprovação instantânea</span></div>
+          </div>
+          <div id="pixDetails" style="margin-top:12px;padding:12px;background:var(--border);border-radius:8px;text-align:center">
+            <p style="font-size:0.78rem;color:var(--text-light);margin-bottom:4px">Chave Pix (cópia e cola):</p>
+            <p id="pixKeyDisplay" style="font-weight:700;font-size:0.9rem;word-break:break-all;background:var(--surface);padding:8px;border-radius:6px">contato@calmamente.app</p>
+            <button id="copyPixBtn" class="btn btn-secondary" style="margin-top:8px;font-size:0.82rem;padding:6px 16px">&#128203; Copiar Chave</button>
+            <p style="font-size:0.72rem;color:var(--text-light);margin-top:8px">Após o pagamento, envie o comprovante para contato@calmamente.app</p>
+          </div>
+        </div>
+
+        <div class="payment-option" data-method="card" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer;background:var(--card-bg)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <input type="radio" name="payment" value="card" style="accent-color:var(--primary)">
+            <span style="font-size:1.3rem">&#128179;</span>
+            <div><strong>Cartão de Crédito</strong><br><span style="font-size:0.78rem;color:var(--text-light)">Via Mercado Pago / Stripe</span></div>
+          </div>
+          <div id="cardDetails" style="display:none;margin-top:12px;padding:12px;background:var(--border);border-radius:8px;text-align:center">
+            <p style="font-size:0.85rem;color:var(--text-light)">&#128274; Pagamento processado com segurança</p>
+            <button class="btn btn-primary" style="margin-top:8px;width:100%" onclick="alert('Redirecionando para pagamento com cartão...')">Ir para Pagamento</button>
+          </div>
+        </div>
+
+        <div class="payment-option" data-method="boleto" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;background:var(--card-bg)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <input type="radio" name="payment" value="boleto" style="accent-color:var(--primary)">
+            <span style="font-size:1.3rem">&#128196;</span>
+            <div><strong>Boleto Bancário</strong><br><span style="font-size:0.78rem;color:var(--text-light)">Até 3 dias úteis</span></div>
+          </div>
+          <div id="boletoDetails" style="display:none;margin-top:12px;padding:12px;background:var(--border);border-radius:8px;text-align:center">
+            <p style="font-size:0.85rem;color:var(--text-light)">Boleto gerado na hora, vencimento em 3 dias</p>
+            <button class="btn btn-primary" style="margin-top:8px;width:100%" onclick="alert('Boleto gerado! Enviaremos no seu email.')">Gerar Boleto</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" style="width:100%" onclick="document.getElementById('checkoutModal').style.display='none'">Continuar Depois</button>
+    </div>
+  </div>
+
+  <!-- GIFT MODAL -->
+  <div id="giftModal" class="modal-overlay" style="display:none">
+    <div class="modal">
+      <h2>&#127873; Presentear o CalmaMente</h2>
+      <p style="margin-bottom:16px">Dê o presente do autocuidado para alguém especial</p>
+      <div class="gift-options" style="text-align:left;margin-bottom:16px">
+        <label style="display:block;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer">
+          <input type="radio" name="giftPlan" value="plus" checked style="accent-color:var(--primary)">
+          <strong>Plus - R$ 9,90/mês</strong>
+          <span style="display:block;font-size:0.8rem;color:var(--text-light)">CBT, Gratidão, Sono, Vídeos Plus</span>
+        </label>
+        <label style="display:block;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer">
+          <input type="radio" name="giftPlan" value="premium" style="accent-color:var(--primary)">
+          <strong>Premium - R$ 19,90/mês</strong>
+          <span style="display:block;font-size:0.8rem;color:var(--text-light)">Tudo ilimitado + insights + sem anúncios</span>
+        </label>
+      </div>
+      <div style="margin-bottom:16px">
+        <input type="email" id="giftEmail" placeholder="Email de quem vai receber" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-size:0.9rem">
+      </div>
+      <button id="giftPurchase" class="btn btn-primary" style="width:100%;margin-bottom:8px">&#127873; Comprar Presente</button>
+      <button class="btn btn-secondary" style="width:100%" onclick="document.getElementById('giftModal').style.display='none'">Cancelar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
